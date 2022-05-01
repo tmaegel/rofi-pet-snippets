@@ -1,0 +1,71 @@
+---
+exclude: (^static/|^staticfiles/|^manage.py|^setup.py|^instance)
+fail_fast: true
+
+repos:
+  - repo: "https://github.com/pre-commit/pre-commit-hooks"
+    rev: "v4.1.0"
+    hooks:
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-byte-order-marker
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: pretty-format-json
+        args: ["--autofix", "--indent=4", "--no-sort-keys"]
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: requirements-txt-fixer
+      - id: debug-statements
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      # - id: end-of-file-fixer
+      - id: fix-encoding-pragma
+        args: ["--pragma", "# coding=utf-8"]
+      - id: trailing-whitespace
+
+  - repo: "https://github.com/psf/black"
+    rev: "22.3.0"
+    hooks:
+      - id: black
+
+  - repo: "https://github.com/PyCQA/isort"
+    rev: "5.10.1"
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
+
+  - repo: "https://github.com/PyCQA/flake8"
+    rev: "4.0.1"
+    hooks:
+      - id: flake8
+        args: ["--max-line-length=88"]
+
+  - repo: local
+    hooks:
+      - id: pylint
+        args: ["--max-line-length=88", "--disable=R0903,R0913,C0103,C0114,C0115,C0116"]
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        require_serial: true
+
+      - id: pytest
+        name: pytest
+        stages: [commit]
+        language: system
+        entry: python -m pytest
+        types: [python]
+
+      - id: pytest-cov
+        name: pytest
+        stages: [push]
+        language: system
+        entry: python -m pytest --cov --cov-fail-under=75
+        types: [python]
+        pass_filenames: false
