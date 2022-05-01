@@ -1,6 +1,6 @@
 # rofi_pet_snippets
 
-Rofi plugin to display, search and copy pet snippets to clipboard (wayland only).
+[Rofi](https://github.com/davatorium/rofi) script/plugin to list, search and copy [pet](https://github.com/knqyf263/pet) snippets to clipboard (wayland only).
 
 ![screenshot](screenshot.png "screenshot")
 
