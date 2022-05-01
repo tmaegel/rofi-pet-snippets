@@ -47,7 +47,7 @@ class CmdWrapper:
                     err,
                 )
                 raise RuntimeError(
-                    f"Error while running command '{cmd}' [{proc.returncode}]: {err}"
+                    f"Error while running command '{cmd}' [{proc.returncode}]: {err!r}"
                 )
 
         return (
