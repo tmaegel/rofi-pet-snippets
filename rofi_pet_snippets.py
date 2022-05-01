@@ -165,6 +165,7 @@ def check_dependency(cmd: str) -> bool:
 def main() -> None:
     check_dependency("pet")
     check_dependency("wl-copy")
+    check_dependency("notify-send")
     rofi = RofiWrapper(prompt="snippets >")
     if rofi.first_call():
         logger.info("rofi was called for the first time.")

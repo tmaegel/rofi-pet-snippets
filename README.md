@@ -1,4 +1,4 @@
-# rofi-pet-snippets
+# rofi_pet_snippets
 
 Rofi plugin to display, search and copy pet snippets to clipboard (wayland only).
 
@@ -9,6 +9,7 @@ Rofi plugin to display, search and copy pet snippets to clipboard (wayland only)
 - [rofi](https://github.com/davatorium/rofi)
 - [pet](https://github.com/knqyf263/pet)
 - `wl-copy` (e.g. from the debian package `wl-clipboard`)
+- `notify-send` (e.g. from debian package `libnotify4`
 - `python3.9` or newer
 - `requirements.txt` for runtime dependencies
 - `requirements_dev.txt` for development dependencies
