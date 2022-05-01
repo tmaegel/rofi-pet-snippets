@@ -32,5 +32,5 @@ make install
 and run the rofi script in your window manager or wherever like this.
 
 ```bash
-rofi -show snippets -modi "snippets:rofi_pet_snippets.py"
+rofi -show snippets -modi "snippets:rofi-pet-snippets"
 ```

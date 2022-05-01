@@ -2,10 +2,9 @@
 # coding=utf-8
 
 import pytest
+from conftest import mockenv, mockenvclear
 
 from rofi_pet_snippets import RofiWrapper
-
-from .conftest import mockenv, mockenvclear
 
 
 def test_rofi_output__valid_1(capsys):

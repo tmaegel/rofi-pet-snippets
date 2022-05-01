@@ -2,10 +2,10 @@ SRC_PATH = rofi_pet_snippets
 VENV = ./venv
 
 run:
-	rofi -show snippets -modi "snippets:./rofi_pet_snippets.py"
+	rofi -show snippets -modi "snippets:./rofi_pet_snippets/__init__.py"
 
 install:
-	cp -v rofi_pet_snippets.py ~/.local/bin/
+	pip install --user .
 
 test:
 	python -m pytest
