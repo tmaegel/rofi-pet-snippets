@@ -9,6 +9,8 @@ import subprocess
 import sys
 from typing import Tuple, Union
 
+VERSION = "0.0.1"
+
 logger = logging.getLogger(os.path.basename(__file__))
 logger.setLevel(logging.DEBUG)
 handler = logging.handlers.SysLogHandler(address="/dev/log")
