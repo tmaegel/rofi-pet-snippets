@@ -106,11 +106,20 @@ class RofiWrapper:
     def output(
         entry: str, info: Union[str, None] = None, meta: Union[str, None] = None
     ) -> None:
-        entry = f"{entry}"
+        first_attr = True
+        entry = entry + "\0"
         if info:
-            entry = entry + f"\0info\x1f{info}"
+            if first_attr:
+                entry = entry + "info\x1f" + info
+                first_attr = False
+            else:
+                entry = entry + "\x1finfo\x1f" + info
         if meta:
-            entry = entry + f"\0meta\x1f{meta}"
+            if first_attr:
+                entry = entry + "meta\x1f" + meta
+                first_attr = False
+            else:
+                entry = entry + "\x1fmeta\x1f" + meta
         print(entry)
 
     @staticmethod
@@ -143,13 +152,19 @@ class RofiWrapper:
         return info
 
 
-def main() -> None:
+def check_dependency(cmd: str) -> bool:
     try:
-        CmdWrapper.run_cmd(["which", "pet"])
+        CmdWrapper.run_cmd(["which", cmd])
     except RuntimeError:
-        logger.error("pet is not installed on your system.")
+        logger.error("%s is not installed on your system.", cmd)
         sys.exit(1)
 
+    return True
+
+
+def main() -> None:
+    check_dependency("pet")
+    check_dependency("wl-copy")
     rofi = RofiWrapper(prompt="snippets >")
     if rofi.first_call():
         logger.info("rofi was called for the first time.")
