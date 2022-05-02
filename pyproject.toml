@@ -1,3 +1,55 @@
 [build-system]
 requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[tool.pytest]
+testpaths = "tests"
+
+[tool.coverage.run]
+branch = true
+source = ["rofi_pet_snippets"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 75
+exclude_lines = [
+  "pragma: no cover",
+  "def __repr__",
+  "if self.debug:",
+  "if settings.DEBUG",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "if 0:",
+  "if False:",
+  "if __name__ == .__main__.:",
+]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py39,py310
+
+[testenv]
+deps =
+  pytest >= 7,<8
+  coverage[toml] >= 6,<7
+commands =
+  coverage run -m pytest
+  coverage report
+"""
+
+[tool.isort]
+skip_glob = "venv/*"
+profile = "black"
+
+[tool.mypy]
+disallow_any_decorated = true
+disallow_any_generics = true
+disallow_any_unimported = false
+disallow_subclassing_any = false
+disallow_untyped_calls = true
+# disallow_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_return_any = true

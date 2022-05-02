@@ -59,7 +59,7 @@ repos:
         name: pytest
         stages: [commit]
         language: system
-        entry: python -m pytest
+        entry: coverage run -m pytest
         types: [python]
         always_run: true
         pass_filenames: false
@@ -68,7 +68,7 @@ repos:
         name: pytest
         stages: [commit]
         language: system
-        entry: python -m pytest --cov --cov-fail-under=75
+        entry: coverage report
         types: [python]
         always_run: true
         pass_filenames: false

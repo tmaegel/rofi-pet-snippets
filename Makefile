@@ -7,8 +7,11 @@ install:
 	pip install --user .
 
 test:
-	python -m pytest
-	python -m pytest --cov --cov-fail-under=75
+	coverage run -m pytest
+	coverage report
+
+tox:
+	tox -e py39
 
 lint:
 	python -m flake8
