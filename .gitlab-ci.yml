@@ -32,5 +32,5 @@ before_script:
 test:
   script:
     - pip install ".[dev]"
-    - pytest
+    - python -m pytest
     - python -m pytest --cov --cov-fail-under=75
