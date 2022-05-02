@@ -3,7 +3,7 @@
 
 from unittest.mock import patch
 
-from rofi_pet_snippets import PetWrapper
+from rofi_pet_snippets.pet import PetWrapper
 
 
 @patch(

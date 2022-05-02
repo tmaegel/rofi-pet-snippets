@@ -4,7 +4,7 @@
 import pytest
 from conftest import mockenv, mockenvclear
 
-from rofi_pet_snippets import RofiWrapper
+from rofi_pet_snippets.rofi import RofiWrapper
 
 
 def test_rofi_output__valid_1(capsys):

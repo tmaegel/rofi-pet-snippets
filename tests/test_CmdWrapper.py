@@ -3,7 +3,8 @@
 
 import pytest
 
-from rofi_pet_snippets import CmdWrapper, check_dependency
+from rofi_pet_snippets import check_dependency
+from rofi_pet_snippets.cmd import CmdWrapper
 
 
 def test_run_cmd__success():
