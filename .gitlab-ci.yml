@@ -33,4 +33,4 @@ test:
   script:
     - pip install ".[dev]"
     - pytest
-    - pytest --cov --cov-fail-under=75
+    - python -m pytest --cov --cov-fail-under=75
