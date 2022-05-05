@@ -3,7 +3,7 @@
 
 import os
 import sys
-from typing import Union
+from typing import Optional
 
 from .log import logger
 
@@ -20,7 +20,7 @@ class RofiWrapper:
 
     @staticmethod
     def output(
-        entry: str, info: Union[str, None] = None, meta: Union[str, None] = None
+        entry: str, info: Optional[str] = None, meta: Optional[str] = None
     ) -> None:
         first_attr = True
         entry = entry + "\0"
@@ -39,7 +39,7 @@ class RofiWrapper:
         print(entry)
 
     @staticmethod
-    def get_value() -> Union[str, None]:
+    def get_value() -> Optional[str]:
         try:
             return sys.argv[1]
         except KeyError:

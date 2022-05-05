@@ -2,7 +2,7 @@
 # coding=utf-8
 
 import subprocess
-from typing import Tuple, Union
+from typing import Optional, Tuple
 
 from .log import logger
 
@@ -11,7 +11,7 @@ class CmdWrapper:
     @staticmethod
     def run_cmd(
         cmd: list[str], pipe: bool = True
-    ) -> Tuple[Union[str, None], Union[str, None], int]:
+    ) -> Tuple[Optional[str], Optional[str], int]:
         out = None
         err = None
         proc = None

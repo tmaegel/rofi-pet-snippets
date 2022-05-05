@@ -2,14 +2,21 @@
 # coding=utf-8
 
 import re
+from typing import TypedDict
 
 from .cmd import CmdWrapper
 
 
+class Snippet(TypedDict):
+    description: str
+    command: str
+    tags: list[str]
+
+
 class PetWrapper(CmdWrapper):
     @staticmethod
-    def list_snippets():
-        def reset_snippet():
+    def list_snippets() -> list[Snippet]:
+        def reset_snippet() -> Snippet:
             return {
                 "description": "",
                 "command": "",
@@ -17,7 +24,7 @@ class PetWrapper(CmdWrapper):
             }
 
         snippet = reset_snippet()
-        snippets = []
+        snippets: list[Snippet] = []
         out, _, _ = PetWrapper.run_cmd(["pet", "list"])
         if not out:
             return snippets

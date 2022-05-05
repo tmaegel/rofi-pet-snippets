@@ -45,17 +45,73 @@ commands =
   flake8
 """
 
+[tool.pylint.FORMAT]
+max-line-length = 88
+disable = ["R0903", "R0913", "C0103", "C0114", "C0115", "C0116", "C0411"]
+
 [tool.isort]
 skip_glob = "venv/*"
 profile = "black"
 
 [tool.mypy]
-disallow_any_decorated = true
-disallow_any_generics = true
+strict = false
+# Disallow dynamic typing
+# Disallows usage of types that come from unfollowed imports
+# (anything imported from an unfollowed import is automatically
+# given a type of Any).
 disallow_any_unimported = false
-disallow_subclassing_any = false
-disallow_untyped_calls = true
-# disallow_untyped_defs = true
-ignore_missing_imports = true
+# Disallows all expressions in the module that have type Any.
+disallow_any_expr = false
+# Disallows functions that have Any in their signature
+# after decorator transformation.
+disallow_any_decorated = false
+# Disallows explicit Any in type positions such as type
+# annotations and generic type parameters.
+disallow_any_explicit = false
+# Disallows usage of generic types that do not specify
+# explicit type parameters.
+disallow_any_generics = true
+# Disallows subclassing a value of type Any.
+disallow_subclassing_any = true
+
+# Untyped definitions and calls
+# Disallows calling functions without type annotations
+# from functions with type annotations.
+disallow_untyped_calls = false
+
+# Disallows defining functions without type annotations
+# or with incomplete type annotations.
+disallow_untyped_defs = true
+# Disallows defining functions with incomplete type annotations.
+disallow_incomplete_defs = true
+# Type-checks the interior of functions without type annotations.
+check_untyped_defs = true
+# Reports an error whenever a function with type annotations is
+# decorated with a decorator without annotations.
+disallow_untyped_decorators = true
+
+# None and Optional handling
+# Changes the treatment of arguments with a default value
+# of None by not implicitly making their type Optional.
+no_implicit_optional = true
+# Enables or disables strict Optional checks. If False,
+# mypy treats None as compatible with every type.
+strict_optional = false
+
+# Configuring warnings
+# Warns about casting an expression to its inferred type.
+warn_redundant_casts = true
+# Warns about unneeded # type: ignore comments.
 warn_unused_ignores = true
+# Shows errors for missing return statements on some execution paths.
+warn_no_return = true
+# Shows a warning when returning a value with type Any from a function
+# declared with a non- Any return type.
 warn_return_any = true
+# Shows a warning when encountering any code inferred to be unreachable
+# or redundant after performing type analysis.
+warn_unreachable = true
+
+# Import discovery
+# Suppresses error messages about imports that cannot be resolved.
+ignore_missing_imports = true
