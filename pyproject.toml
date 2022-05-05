@@ -28,7 +28,7 @@ exclude_lines = [
 [tool.tox]
 legacy_tox_ini = """
 [tox]
-envlist = flake8,py39
+envlist = py39
 
 [testenv]
 deps =

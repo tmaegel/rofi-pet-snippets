@@ -16,7 +16,7 @@ cache:
     - venv/
 
 before_script:
-  - python --version  # For debugging
+  - python --version # For debugging
   - pip install virtualenv
   - virtualenv venv
   - source venv/bin/activate
@@ -24,5 +24,7 @@ before_script:
 test:
   script:
     - pip install ".[dev]"
-    - tox -e flake8
+    - flake8
+    - pylint rofi_pet_snippets/
+    - mypy rofi_pet_snippets/
     - tox -e py39
