@@ -22,30 +22,15 @@ class RofiWrapper:
     def output(
         entry: str, info: Optional[str] = None, meta: Optional[str] = None
     ) -> None:
-        first_attr = True
         entry = entry + "\0"
         if info:
-            if first_attr:
-                entry = entry + "info\x1f" + info
-                first_attr = False
-            else:
-                entry = entry + "\x1finfo\x1f" + info
+            entry = entry + "info\x1f" + info
         if meta:
-            if first_attr:
-                entry = entry + "meta\x1f" + meta
-                first_attr = False
-            else:
+            if "info\x1f" in entry:
                 entry = entry + "\x1fmeta\x1f" + meta
+            else:
+                entry = entry + "meta\x1f" + meta
         print(entry)
-
-    @staticmethod
-    def get_value() -> Optional[str]:
-        try:
-            return sys.argv[1]
-        except KeyError:
-            logger.error("No argument detected.")
-
-        return None
 
     @staticmethod
     def first_call() -> bool:

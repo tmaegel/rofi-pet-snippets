@@ -54,6 +54,7 @@ skip_glob = "venv/*"
 profile = "black"
 
 [tool.mypy]
+exclude = "tests"
 strict = false
 # Disallow dynamic typing
 # Disallows usage of types that come from unfollowed imports
