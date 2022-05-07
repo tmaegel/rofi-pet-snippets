@@ -1,10 +1,13 @@
 SRC_PATH = rofi_pet_snippets
 
 run:
-	rofi -show snippets -modi "snippets:./$(SRC_PATH)/__init__.py"
+	rofi -show snippets -modi "snippets:venv/bin/rofi-pet-snippets"
 
 install:
 	pip install --user .
+
+install_dev:
+	pip install -e .
 
 test:
 	coverage run -m pytest
@@ -15,10 +18,8 @@ tox:
 
 lint:
 	python -m flake8
-	python -m mypy $(SRC_PATH)
+	pylint $(SRC_PATH)
+	python -m mypy .
 
 pre-commit:
 	pre-commit run --all-files
-
-install_dev:
-	pip install -r requirements_dev.txt
