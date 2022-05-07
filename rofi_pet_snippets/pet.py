@@ -14,8 +14,8 @@ class Snippet(TypedDict):
 
 
 class PetWrapper(CmdWrapper):
-    @staticmethod
-    def list_snippets() -> list[Snippet]:
+    @classmethod
+    def list_snippets(cls) -> list[Snippet]:
         def reset_snippet() -> Snippet:
             return {
                 "description": "",
@@ -25,7 +25,7 @@ class PetWrapper(CmdWrapper):
 
         snippet = reset_snippet()
         snippets: list[Snippet] = []
-        out, _, _ = PetWrapper.run_cmd(["pet", "list"])
+        out, _, _ = cls.run_cmd(["pet", "list"])
         if not out:
             return snippets
         command_regex = re.compile("^Command: (?P<command>.*)$")
