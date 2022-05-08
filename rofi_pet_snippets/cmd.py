@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-import subprocess
+from subprocess import DEVNULL, PIPE, CalledProcessError, Popen
 from typing import Optional, Tuple
 
 from .log import logger
@@ -16,17 +16,14 @@ class CmdWrapper:
         err = None
         proc = None
         try:
-            with subprocess.Popen(
+            with Popen(
                 cmd,
-                stdout=subprocess.PIPE if pipe else subprocess.DEVNULL,
-                stderr=subprocess.PIPE if pipe else subprocess.DEVNULL,
-                # stdin=subprocess.PIPE if pipe else subprocess.DEVNULL,
+                stdout=PIPE if pipe else DEVNULL,
+                stderr=PIPE if pipe else DEVNULL,
+                # stdin=PIPE if pipe else DEVNULL,
             ) as proc:
                 out, err = proc.communicate()
-        except subprocess.CalledProcessError as exc:
-            logger.critical("Error while running command '%s': %s", cmd, exc)
-            raise RuntimeError(f"Error while running command '{cmd}': {exc}") from exc
-        except FileNotFoundError as exc:
+        except (CalledProcessError, FileNotFoundError) as exc:
             logger.critical("Error while running command '%s': %s", cmd, exc)
             raise RuntimeError(f"Error while running command '{cmd}': {exc}") from exc
         finally:
