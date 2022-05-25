@@ -45,12 +45,13 @@ class CmdWrapper:
     @staticmethod
     def run_detached_cmd(cmd: list[str]) -> None:
         try:
-            Popen(
+            with Popen(
                 cmd,
                 stdout=DEVNULL,
                 stderr=DEVNULL,
                 stdin=DEVNULL,
-            )
+            ):
+                pass
         except (OSError, ValueError, FileNotFoundError) as exc:
             logger.critical("Error while running command '%s': %s", cmd, exc)
             raise RuntimeError(f"Error while running command '{cmd}': {exc}") from exc
