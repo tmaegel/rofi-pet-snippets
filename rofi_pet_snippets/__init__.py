@@ -9,7 +9,7 @@ from .log import logger
 from .pet import PetWrapper
 from .rofi import RofiWrapper
 
-VERSION = "0.0.1"
+VERSION = "0.0.2"
 
 
 def check_dependency(cmd: str) -> bool:
@@ -29,7 +29,6 @@ def parse_args() -> dict[str, bool]:
         "notify": False,
         "terminal": False,
     }
-    logger.info(sys.argv[1:])
     try:
         opts, _ = getopt.getopt(sys.argv[1:], "dnt", ["debug", "notify", "terminal"])
     except getopt.GetoptError as exc:
