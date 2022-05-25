@@ -1,7 +1,5 @@
-#!/usr/bin/env python
 # coding=utf-8
-
-from subprocess import DEVNULL, PIPE, CalledProcessError, Popen
+from subprocess import DEVNULL, PIPE, Popen
 from typing import Optional, Tuple
 
 from .log import logger
@@ -23,7 +21,7 @@ class CmdWrapper:
                 # stdin=PIPE if pipe else DEVNULL,
             ) as proc:
                 out, err = proc.communicate()
-        except (CalledProcessError, FileNotFoundError) as exc:
+        except (OSError, ValueError, FileNotFoundError) as exc:
             logger.critical("Error while running command '%s': %s", cmd, exc)
             raise RuntimeError(f"Error while running command '{cmd}': {exc}") from exc
         finally:
@@ -43,3 +41,16 @@ class CmdWrapper:
             err.decode("utf-8") if err else None,
             proc.returncode if proc else -1,
         )
+
+    @staticmethod
+    def run_detached_cmd(cmd: list[str]) -> None:
+        try:
+            Popen(
+                cmd,
+                stdout=DEVNULL,
+                stderr=DEVNULL,
+                stdin=DEVNULL,
+            )
+        except (OSError, ValueError, FileNotFoundError) as exc:
+            logger.critical("Error while running command '%s': %s", cmd, exc)
+            raise RuntimeError(f"Error while running command '{cmd}': {exc}") from exc
