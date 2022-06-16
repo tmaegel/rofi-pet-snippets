@@ -4,7 +4,7 @@
 
 ![screenshot](screenshot.png "screenshot")
 
-# Dependencies
+## Dependencies
 
 - [rofi](https://github.com/davatorium/rofi)
 - [pet](https://github.com/knqyf263/pet)
@@ -15,7 +15,7 @@
 - `requirements_dev.txt` for development dependencies
 - `make` (optional)
 
-# Getting Started
+## Getting Started
 
 For a quick run or test of the rofi script.
 
